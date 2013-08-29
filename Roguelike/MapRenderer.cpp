@@ -4,8 +4,7 @@
 
 MapRenderer::MapRenderer(Map &mapIn) : map(mapIn)
 {
-	floor.loadFromFile("image/floor.png");
-	floorTexture.loadFromImage(floor);
+	floorTexture.loadFromFile("image/floor.png");
 }
 
 

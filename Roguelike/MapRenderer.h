@@ -10,7 +10,6 @@ private:
 
 	Map &map;
 
-	sf::Image floor;
 	sf::Texture floorTexture;
 
 };
