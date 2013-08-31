@@ -20,7 +20,7 @@ void MapRenderer::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
 		for(int y=0; y < map.getBounds().y; y++)
 		{
-			sprite.setPosition(floorTexture.getSize().x * x, floorTexture.getSize().y * y);
+			sprite.setPosition((float)floorTexture.getSize().x * x, (float)floorTexture.getSize().y * y);
 			target.draw(sprite);
 		}
 	}

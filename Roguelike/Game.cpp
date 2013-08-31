@@ -26,7 +26,7 @@ void Game::init()
 {
 	debugOverlay.addString(&fpsString);
 	debugOverlay.addString(&frameSkipString);
-	map.create(10, 5);
+	map.create(20, 30);
 	lastTime = 0;
 	clock.restart();
 	gameState = GameState::RUNNING;
