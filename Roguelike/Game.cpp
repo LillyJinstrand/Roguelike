@@ -4,7 +4,6 @@
 
 Game::Game(void) : window(sf::VideoMode(800, 600), "Roguelike"), mapRenderer(map)
 {
-	skippedFrames = 0;
 }
 
 
@@ -26,7 +25,10 @@ void Game::init()
 {
 	debugOverlay.addString(&fpsString);
 	debugOverlay.addString(&frameSkipString);
-	map.create(20, 30);
+	map.create(10, 5);
+	worldView.setSize(800, 600);
+	worldView.setCenter(400, 300);
+	skippedFrames = 0;
 	lastTime = 0;
 	clock.restart();
 	gameState = GameState::RUNNING;
@@ -60,6 +62,7 @@ void Game::update()
 {
 	fpsString = std::string("FPS: ") + std::to_string(floor(fpsCounter.getFps()));
 	frameSkipString = std::string("Skipped Frames: ") + std::to_string(skippedFrames);
+
 	switch (gameState)
 	{
 	case Game::UNINITIALIZED:
@@ -80,7 +83,24 @@ void Game::update()
 			{
 				debugOverlay.toggleVisible();
 			}
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::W)
+			{
+				player.move(0, -1);
+			}
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::S)
+			{
+				player.move(0, 1);
+			}
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::A)
+			{
+				player.move(-1, 0);
+			}
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
+			{
+				player.move(1, 0);
+			}
         }
+		worldView.setCenter(sf::Vector2f(player.getPosition().x * 32, player.getPosition().y * 32));
 		break;
 	case Game::PAUSED:
 		break;
@@ -95,6 +115,7 @@ void Game::update()
 void Game::draw()
 {
 	window.clear();
+	window.setView(worldView);
 	switch (gameState)
 	{
 	case Game::UNINITIALIZED:
@@ -114,6 +135,7 @@ void Game::draw()
 		//This should never happen
 		break;
 	}
+	window.setView(window.getDefaultView());
 	window.draw(debugOverlay);
     window.display();
 	fpsCounter.countFrame();

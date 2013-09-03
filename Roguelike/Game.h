@@ -3,6 +3,7 @@
 #include "fpsCounter.h"
 #include "Map.h"
 #include "MapRenderer.h"
+#include "Player.h"
 #include <string>
 class Game
 {
@@ -30,11 +31,15 @@ private:
 
 	GameState gameState;
 	sf::RenderWindow window;
+	sf::View worldView;
+
 	DebugOverlay debugOverlay;
 	FpsCounter fpsCounter;
 
 	Map map;
 	MapRenderer mapRenderer;
+
+	Player player;
 
 	sf::Clock clock;
 	int lastTime;
