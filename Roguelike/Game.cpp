@@ -2,7 +2,7 @@
 #include "Game.h"
 
 
-Game::Game(void) : window(sf::VideoMode(800, 600), "Roguelike"), mapRenderer(map)
+Game::Game(void) : window(sf::VideoMode(800, 600), "Roguelike"), mapRenderer(map) , playerRenderer(player)
 {
 }
 
@@ -100,7 +100,7 @@ void Game::update()
 				player.move(1, 0);
 			}
         }
-		worldView.setCenter(sf::Vector2f(player.getPosition().x * 32, player.getPosition().y * 32));
+		worldView.setCenter(sf::Vector2f(player.getPosition().x * Game::TILE_SIZE, player.getPosition().y * Game::TILE_SIZE));
 		break;
 	case Game::PAUSED:
 		break;
@@ -126,6 +126,7 @@ void Game::draw()
 		break;
 	case Game::RUNNING:
 		window.draw(mapRenderer);
+		window.draw(playerRenderer);
 		break;
 	case Game::PAUSED:
 		break;

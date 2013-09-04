@@ -33,3 +33,26 @@ sf::Vector2i Map::getBounds()
 {
 	return mapBounds;
 }
+bool Map::checkBounds(sf::Vector2i pos)
+{
+	if(pos.x < 0 || pos.y < 0 || pos.x > getBounds().x || pos.y > getBounds().y)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+bool Map::isTileWalkable(sf::Vector2i pos)
+{
+	if(getTile(pos).getTileId() != 0 && checkBounds(pos))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}

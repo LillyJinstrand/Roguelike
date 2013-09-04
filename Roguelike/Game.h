@@ -4,6 +4,7 @@
 #include "Map.h"
 #include "MapRenderer.h"
 #include "Player.h"
+#include "PlayerRenderer.h"
 #include <string>
 class Game
 {
@@ -11,6 +12,8 @@ public:
 	Game(void);
 	~Game(void);
 	void start(); //Start the gameloop
+
+	static const int TILE_SIZE = 32;
 private:
 	enum GameState
 	{
@@ -40,6 +43,7 @@ private:
 	MapRenderer mapRenderer;
 
 	Player player;
+	PlayerRenderer playerRenderer;
 
 	sf::Clock clock;
 	int lastTime;

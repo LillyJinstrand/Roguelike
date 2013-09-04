@@ -1,5 +1,6 @@
 #pragma once
 #include "Map.h"
+#include "Game.h"
 class MapRenderer : public sf::Drawable
 {
 public:
