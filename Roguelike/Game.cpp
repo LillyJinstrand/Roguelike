@@ -2,7 +2,7 @@
 #include "Game.h"
 
 
-Game::Game(void) : window(sf::VideoMode(800, 600), "Roguelike"), mapRenderer(map) , playerRenderer(player)
+Game::Game(void) : window(sf::VideoMode(800, 600), "Roguelike")
 {
 }
 
@@ -23,14 +23,22 @@ void Game::start()
 
 void Game::init()
 {
+	renderManager.setGame(this);
+	renderManager.setMap(&map);
+	renderManager.setPlayer(&player);
+
 	debugOverlay.addString(&fpsString);
 	debugOverlay.addString(&frameSkipString);
+
 	map.create(10, 5);
+
 	worldView.setSize(800, 600);
 	worldView.setCenter(400, 300);
+
 	skippedFrames = 0;
 	lastTime = 0;
 	clock.restart();
+
 	gameState = GameState::RUNNING;
 }
 
@@ -125,8 +133,7 @@ void Game::draw()
 	case Game::MENU:
 		break;
 	case Game::RUNNING:
-		window.draw(mapRenderer);
-		window.draw(playerRenderer);
+		window.draw(renderManager);
 		break;
 	case Game::PAUSED:
 		break;

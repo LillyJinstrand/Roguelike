@@ -2,9 +2,8 @@
 #include "DebugOverlay.h"
 #include "fpsCounter.h"
 #include "Map.h"
-#include "MapRenderer.h"
 #include "Player.h"
-#include "PlayerRenderer.h"
+#include "RenderManager.h"
 #include <string>
 class Game
 {
@@ -39,11 +38,11 @@ private:
 	DebugOverlay debugOverlay;
 	FpsCounter fpsCounter;
 
+	RenderManager renderManager;
+
 	Map map;
-	MapRenderer mapRenderer;
 
 	Player player;
-	PlayerRenderer playerRenderer;
 
 	sf::Clock clock;
 	int lastTime;

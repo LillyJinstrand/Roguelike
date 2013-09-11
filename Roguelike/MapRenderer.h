@@ -4,12 +4,15 @@
 class MapRenderer : public sf::Drawable
 {
 public:
-	MapRenderer(Map &);
+	MapRenderer();
+	explicit MapRenderer(Map*);
 	~MapRenderer(void);
+
+	void setMap(Map*);
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-	Map &map;
+	Map *map;
 
 	sf::Texture floorTexture;
 

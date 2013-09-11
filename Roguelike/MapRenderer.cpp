@@ -1,9 +1,15 @@
 #include "stdafx.h"
 #include "MapRenderer.h"
 
-
-MapRenderer::MapRenderer(Map &mapIn) : map(mapIn)
+MapRenderer::MapRenderer()
 {
+	map = 0;
+	floorTexture.loadFromFile("image/floor.png");
+}
+
+MapRenderer::MapRenderer(Map *mapIn)
+{
+	map = mapIn;
 	floorTexture.loadFromFile("image/floor.png");
 }
 
@@ -12,13 +18,18 @@ MapRenderer::~MapRenderer(void)
 {
 }
 
+void MapRenderer::setMap(Map *mapIn)
+{
+	map = mapIn;
+}
+
 void MapRenderer::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	sf::Sprite sprite;
 	sprite.setTexture(floorTexture);
-	for(int x=0; x < map.getBounds().x; x++)
+	for(int x=0; x < map->getBounds().x; x++)
 	{
-		for(int y=0; y < map.getBounds().y; y++)
+		for(int y=0; y < map->getBounds().y; y++)
 		{
 			sprite.setPosition((float)Game::TILE_SIZE * x, (float)Game::TILE_SIZE * y);
 			target.draw(sprite);
